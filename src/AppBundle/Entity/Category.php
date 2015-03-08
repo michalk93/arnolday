@@ -39,7 +39,7 @@ class Category
     protected $color;
 
     /**
-     * @var
+     * @var datetime
      *
      * @ORM\Column(name="createdAt", type="datetime")
      */
