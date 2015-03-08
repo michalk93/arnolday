@@ -167,4 +167,37 @@
     {
         return $this->createdAt;
     }
+
+    /**
+     * Add createdCategories
+     *
+     * @param \AppBundle\Entity\Category $createdCategories
+     * @return User
+     */
+    public function addCreatedCategory(\AppBundle\Entity\Category $createdCategories)
+    {
+        $this->createdCategories[] = $createdCategories;
+
+        return $this;
+    }
+
+    /**
+     * Remove createdCategories
+     *
+     * @param \AppBundle\Entity\Category $createdCategories
+     */
+    public function removeCreatedCategory(\AppBundle\Entity\Category $createdCategories)
+    {
+        $this->createdCategories->removeElement($createdCategories);
+    }
+
+    /**
+     * Get createdCategories
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCreatedCategories()
+    {
+        return $this->createdCategories;
+    }
 }
