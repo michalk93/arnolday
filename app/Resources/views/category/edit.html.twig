@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+   <h1>Edit category</h1>
+   <form method="post" {{form_enctype(form)}}>
+      {{form_row(form.name)}}
+      {{form_row(form.color)}}
+      {{form_row(form._token)}}
+      {{form_row(form.save)}}
+   </form>
+{% endblock %}

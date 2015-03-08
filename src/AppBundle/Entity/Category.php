@@ -3,7 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
+use \DateTime;
 
 /**
  * Category
@@ -27,6 +28,7 @@ class Category
      * @var string
      *
      * @ORM\Column(name="name", type="string")
+     * @Assert\NotBlank()
      */
     protected $name;
 
@@ -34,6 +36,7 @@ class Category
      * @var string
      *
      * @ORM\Column(name="color", type="string")
+     * @Assert\NotBlank()
      */
     protected $color;
 
@@ -41,20 +44,21 @@ class Category
      * @var datetime
      *
      * @ORM\Column(name="createdAt", type="datetime")
+     * @Assert\NotBlank()
      */
     protected $createdAt;
     
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="createdCategories")
      * @ORM\JoinColumn(name="createdBy_id", referencedColumnName="id", nullable=false)
+     * @Assert\NotBlank()
      */
     protected $createdBy;
 
-    function __construct($createdAt)
+    function __construct()
     {
         $this->createdAt = new DateTime();
     }
-
 
     /**
      * Get id
