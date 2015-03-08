@@ -225,4 +225,50 @@ class Task
     {
         return $this->createdBy;
     }
+
+    /**
+     * Set assignee
+     *
+     * @param \AppBundle\Entity\User $assignee
+     * @return Task
+     */
+    public function setAssignee(\AppBundle\Entity\User $assignee = null)
+    {
+        $this->assignee = $assignee;
+
+        return $this;
+    }
+
+    /**
+     * Get assignee
+     *
+     * @return \AppBundle\Entity\User 
+     */
+    public function getAssignee()
+    {
+        return $this->assignee;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \AppBundle\Entity\Category $category
+     * @return Task
+     */
+    public function setCategory(\AppBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \AppBundle\Entity\Category 
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
 }
