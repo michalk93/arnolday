@@ -57,6 +57,11 @@
     protected $assignedTasks;
 
     
+    /**
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="createdBy")
+     */
+    protected $createdCategories;
+    
     public function __construct() {
        $this->createdAt = new DateTime();
     }

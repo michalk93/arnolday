@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Constraints\DateTime;
 class Category
 {
 
-
     /**
      * @var integer
      *
@@ -44,6 +43,12 @@ class Category
      * @ORM\Column(name="createdAt", type="datetime")
      */
     protected $createdAt;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="createdCategories")
+     * 
+     */
+    protected $createdBy;
 
     function __construct($createdAt)
     {
