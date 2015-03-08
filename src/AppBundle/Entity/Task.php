@@ -60,7 +60,6 @@ class Task
     protected $assignee;
 
     /**
-
      * @ORM\ManyToOne(targetEntity="User", inversedBy="createdTasks")
      */
     protected $createdBy;
