@@ -1,0 +1,66 @@
+<?php
+
+ namespace AppBundle\Entity;
+
+ use Doctrine\ORM\Mapping as ORM;
+
+ /**
+  * User
+  *
+  * @ORM\Table()
+  * @ORM\Entity
+  */
+ class User {
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var text
+     * 
+     * @ORM\Column(name="email", type="string")
+     */
+    protected $email;
+
+    /**
+     * @var password
+     * 
+     * @ORM\Column(name="password", type="string")
+     */
+    protected $password;
+    
+    /**
+     * @var name
+     * 
+     * @ORM\Column(name="name", type="string")
+     */
+    protected $name;
+    
+    /**
+     * @var createdAt
+     * 
+     * @ORM\Column(name="createdAt", type="datetime")
+     */
+    protected $createdAt;
+    
+    public function __construct() {
+       $this->createdAt = new DateTime();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId() {
+       return $this->id;
+    }
+    
+ }
+ 
