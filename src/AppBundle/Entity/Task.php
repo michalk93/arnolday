@@ -4,8 +4,8 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Task
  * @ORM\Table(name="task")
+ * Task
  * @ORM\Entity
  */
 class Task
@@ -54,11 +54,22 @@ class Task
      */
     protected $createdAt;
 
-
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="createdTasks")
      */
+    protected $assignee;
+
+    /**
+
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="createdTasks")
+     */
     protected $createdBy;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="tasks")
+     */
+    protected $category;
+
 
 
     /**
@@ -208,7 +219,7 @@ class Task
     /**
      * Get createdBy
      *
-     * @return \AppBundle\Entity\User 
+     * @return \AppBundle\Entity\User
      */
     public function getCreatedBy()
     {

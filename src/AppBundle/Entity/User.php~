@@ -48,12 +48,21 @@
      * @ORM\Column(name="createdAt", type="datetime")
      */
     protected $createdAt;
+<<<<<<< HEAD
 
     /**
      * @ORM\OneToMany(targetEntity="Task", mappedBy="createdBy")
      */
     protected $createdTasks;
 
+=======
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="createdBy")
+     */
+    protected $createdCategories;
+    
+>>>>>>> 42a8245f374d10936bca53dc8a54bcb1533c5ec2
     public function __construct() {
        $this->createdAt = new DateTime();
     }
@@ -66,8 +75,13 @@
     public function getId() {
        return $this->id;
     }
+<<<<<<< HEAD
 
 
+=======
+    
+ 
+>>>>>>> 42a8245f374d10936bca53dc8a54bcb1533c5ec2
     /**
      * Set email
      *
@@ -84,7 +98,11 @@
     /**
      * Get email
      *
+<<<<<<< HEAD
      * @return string
+=======
+     * @return string 
+>>>>>>> 42a8245f374d10936bca53dc8a54bcb1533c5ec2
      */
     public function getEmail()
     {
@@ -107,7 +125,11 @@
     /**
      * Get password
      *
+<<<<<<< HEAD
      * @return string
+=======
+     * @return string 
+>>>>>>> 42a8245f374d10936bca53dc8a54bcb1533c5ec2
      */
     public function getPassword()
     {
@@ -130,7 +152,11 @@
     /**
      * Get name
      *
+<<<<<<< HEAD
      * @return string
+=======
+     * @return string 
+>>>>>>> 42a8245f374d10936bca53dc8a54bcb1533c5ec2
      */
     public function getName()
     {
@@ -153,11 +179,18 @@
     /**
      * Get createdAt
      *
+<<<<<<< HEAD
      * @return \DateTime
+=======
+     * @return \DateTime 
+>>>>>>> 42a8245f374d10936bca53dc8a54bcb1533c5ec2
      */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 42a8245f374d10936bca53dc8a54bcb1533c5ec2
 }

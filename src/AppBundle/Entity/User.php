@@ -54,6 +54,17 @@
      */
     protected $createdTasks;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="createdBy")
+     */
+    protected $assignedTasks;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="createdBy")
+     */
+    protected $createdCategories;
+
     public function __construct() {
        $this->createdAt = new DateTime();
     }
@@ -160,7 +171,6 @@
         return $this->createdAt;
     }
 
-
     /**
      * Add createdTasks
      *
@@ -170,6 +180,16 @@
     public function addCreatedTask(\AppBundle\Entity\Task $createdTasks)
     {
         $this->createdTasks[] = $createdTasks;
+    }
+    /**
+     * Add createdCategories
+     *
+     * @param \AppBundle\Entity\Category $createdCategories
+     * @return User
+     */
+    public function addCreatedCategory(\AppBundle\Entity\Category $createdCategories)
+    {
+        $this->createdCategories[] = $createdCategories;
 
         return $this;
     }
@@ -179,6 +199,7 @@
      *
      * @param \AppBundle\Entity\Task $createdTasks
      */
+
     public function removeCreatedTask(\AppBundle\Entity\Task $createdTasks)
     {
         $this->createdTasks->removeElement($createdTasks);
@@ -187,10 +208,29 @@
     /**
      * Get createdTasks
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCreatedTasks()
     {
         return $this->createdTasks;
+      }
+      /**
+     * Remove createdCategories
+     *
+     * @param \AppBundle\Entity\Category $createdCategories
+     */
+    public function removeCreatedCategory(\AppBundle\Entity\Category $createdCategories)
+    {
+        $this->createdCategories->removeElement($createdCategories);
+    }
+
+    /**
+     * Get createdCategories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCreatedCategories()
+    {
+        return $this->createdCategories;
     }
 }
