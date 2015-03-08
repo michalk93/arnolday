@@ -54,7 +54,15 @@ class Task
      */
     protected $createdAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="createdTasks")
+     */
+    protected $assignee;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="tasks")
+     */
+    protected $category;
 
 
     /**

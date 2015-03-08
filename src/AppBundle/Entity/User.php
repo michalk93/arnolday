@@ -41,6 +41,7 @@
      * @ORM\Column(name="name", type="string")
      */
     protected $name;
+
     
     /**
      * @var createdAt
@@ -48,6 +49,13 @@
      * @ORM\Column(name="createdAt", type="datetime")
      */
     protected $createdAt;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="createdBy")
+     */
+    protected $assignedTasks;
+
     
     public function __construct() {
        $this->createdAt = new DateTime();
