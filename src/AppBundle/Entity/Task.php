@@ -56,16 +56,19 @@ class Task
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="createdTasks")
+     * @ORM\JoinColumn(name="assignee_id", referencedColumnName="id", nullable=false)
      */
     protected $assignee;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="createdTasks")
+     * @ORM\JoinColumn(name="createdBy_id", referencedColumnName="id", nullable=false)
      */
     protected $createdBy;
 
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="tasks")
+     *
      */
     protected $category;
 
