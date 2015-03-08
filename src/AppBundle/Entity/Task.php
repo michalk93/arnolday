@@ -55,6 +55,10 @@ class Task
     protected $createdAt;
 
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="createdTasks")
+     */
+    protected $createdBy;
 
 
     /**
@@ -187,4 +191,27 @@ class Task
         return $this;
     }
 
+
+    /**
+     * Set createdBy
+     *
+     * @param \AppBundle\Entity\User $createdBy
+     * @return Task
+     */
+    public function setCreatedBy(\AppBundle\Entity\User $createdBy = null)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return \AppBundle\Entity\User 
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
 }

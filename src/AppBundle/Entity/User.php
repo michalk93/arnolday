@@ -23,32 +23,37 @@
 
     /**
      * @var text
-     * 
+     *
      * @ORM\Column(name="email", type="string")
      */
     protected $email;
 
     /**
      * @var password
-     * 
+     *
      * @ORM\Column(name="password", type="string")
      */
     protected $password;
-    
+
     /**
      * @var name
-     * 
+     *
      * @ORM\Column(name="name", type="string")
      */
     protected $name;
-    
+
     /**
      * @var createdAt
-     * 
+     *
      * @ORM\Column(name="createdAt", type="datetime")
      */
     protected $createdAt;
-    
+
+    /**
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="createdBy")
+     */
+    protected $createdTasks;
+
     public function __construct() {
        $this->createdAt = new DateTime();
     }
@@ -56,13 +61,13 @@
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId() {
        return $this->id;
     }
-    
- 
+
+
     /**
      * Set email
      *
@@ -79,7 +84,7 @@
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -102,7 +107,7 @@
     /**
      * Get password
      *
-     * @return string 
+     * @return string
      */
     public function getPassword()
     {
@@ -125,7 +130,7 @@
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -148,10 +153,44 @@
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+
+    /**
+     * Add createdTasks
+     *
+     * @param \AppBundle\Entity\Task $createdTasks
+     * @return User
+     */
+    public function addCreatedTask(\AppBundle\Entity\Task $createdTasks)
+    {
+        $this->createdTasks[] = $createdTasks;
+
+        return $this;
+    }
+
+    /**
+     * Remove createdTasks
+     *
+     * @param \AppBundle\Entity\Task $createdTasks
+     */
+    public function removeCreatedTask(\AppBundle\Entity\Task $createdTasks)
+    {
+        $this->createdTasks->removeElement($createdTasks);
+    }
+
+    /**
+     * Get createdTasks
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCreatedTasks()
+    {
+        return $this->createdTasks;
     }
 }
