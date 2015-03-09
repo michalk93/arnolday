@@ -13,7 +13,7 @@
  class CategoryController extends Controller {
 
     /**
-     * @Route("/categories")
+     * @Route("/categories", name="categories")
      * @Template()
      */
     public function listAction() {
