@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}Category list{% endblock %}
 {% block body %}
    <h1>Category list</h1>
    <ul>
@@ -7,5 +7,5 @@
          <li>{{ category.name }} - color: {{ category.color}} <a href="{{path('category-edit', {'id': category.id})}}">Edit</a></li>
          {% endfor %}
    </ul>
-   <a href="{{ path('category-add') }}">Add new</a>
+   <a href="{{ path('category-add') }}" class="btn btn-primary btn-lg" role="button">Add new</a>
 {% endblock %}

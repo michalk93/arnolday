@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends 'base.html.twig' %}
 {% block title %}Edit user{% endblock %}
 {% block body %}
 <h1>Edit user</h1>
@@ -7,7 +7,7 @@
     {{ form_row(form.email) }}
     {{ form_row(form.password) }}
     {{form_row(form._token)}}
-    {{form_row(form.save, {'attr': {'class': 'btn btn-default', 'role': 'button'}})}}
+    {{form_row(form.save, {'attr': {'class': 'btn btn-primary btn-default', 'role': 'button'}})}}
 </form>
 
 {% endblock %}

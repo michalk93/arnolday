@@ -19,8 +19,8 @@ class UserController extends Controller
     {
       $entityManager = $this->getDoctrine()->getManager();
       $users = $entityManager->getRepository('AppBundle:User')->findAll();
-      return $this->render('AppBundle:user:list.html.twig', [
-        'users' => $users]);
+      return $this->render('user/list.html.twig', [
+            'users' => $users]);
 
     }
 
@@ -39,7 +39,7 @@ class UserController extends Controller
           return $this->redirect($this->generateUrl('user_list'));
         }
 
-        return $this->render('AppBundle:user:add.html.twig', [
+        return $this->render('user/add.html.twig', [
               'form'=>$form->createView()]);
     }
 
@@ -56,7 +56,7 @@ class UserController extends Controller
           return $this->redirect($this->generateUrl('user_list'));
         }
 
-        return $this->render('AppBundle:user:edit.html.twig', [
+        return $this->render('/user/edit.html.twig', [
               'form'=>$form->createView()]);
     }
 

@@ -19,7 +19,7 @@
     public function listAction() {
        $entityManager = $this->getDoctrine()->getManager();
        $categories = $entityManager->getRepository('AppBundle:Category')->findAll();
-       return $this->render('AppBundle:category:list.html.twig', ['categories' => $categories]);
+       return $this->render('category/list.html.twig', ['categories' => $categories]);
     }
 
     /**
@@ -39,7 +39,7 @@
           return new Response('Category added!');
        }
 
-       return $this->render('AppBundle:category:add.html.twig', ['form' => $form->createView()]);
+       return $this->render('category/add.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -54,7 +54,7 @@
           $entityManager->flush();
           return new Response('Category edited!');
        }
-       return $this->render('AppBundle:category:edit.html.twig', ['form' => $form->createView()]);
+       return $this->render('category/edit.html.twig', ['form' => $form->createView()]);
     }
 
  }
