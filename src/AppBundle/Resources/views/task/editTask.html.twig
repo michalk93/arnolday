@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <form method="POST" {{ form_enctype(form) }}>
+        {{ form_row(form.content) }}
+        {{ form_row(form.dueDate) }}
+        {{ form_row(form.done) }}
+        {{ form_row(form.priority) }}
+        {{ form_row(form.category) }}
+        {{ form_row(form.assignee) }}
+
+        {{ form_widget(form._token) }}
+
+        <input type="submit" value="Aktualizuj"/>
+    </form>
+{% endblock %}
