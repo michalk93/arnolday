@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block title %}Add category{% endblock %}
+{% block body %}
+   <h1>Categories</h1>
+   <form method="post" {{form_enctype(form)}}>
+      {{form_row(form.name)}}
+      {{form_row(form.color)}}
+      {{form_row(form._token)}}
+      {{form_row(form.save, {'attr': {'class': 'btn btn-primary btn-default', 'role': 'button'}})}}
+   </form>
+{% endblock %}
