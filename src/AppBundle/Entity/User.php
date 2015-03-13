@@ -2,6 +2,7 @@
 
  namespace AppBundle\Entity;
 
+ use Doctrine\Common\Collections\ArrayCollection;
  use Doctrine\ORM\Mapping as ORM;
  use \DateTime;
 
@@ -56,7 +57,7 @@
     protected $createdTasks;
 
     /**
-     * @ORM\OneToMany(targetEntity="Task", mappedBy="createdBy")
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="assignee")
      */
     protected $assignedTasks;
 
@@ -68,8 +69,12 @@
 
     public function __construct() {
        $this->createdAt = new DateTime();
+        $this->createdTasks = new ArrayCollection();
     }
 
+     /**
+      * @return name
+      */
     public function __toString() {
       return $this->name;
     }

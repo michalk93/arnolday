@@ -56,7 +56,7 @@ class Task
     protected $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="createdTasks")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="assignedTasks")
      * @ORM\JoinColumn(name="assignee_id", referencedColumnName="id", nullable=false)
      */
     protected $assignee;
