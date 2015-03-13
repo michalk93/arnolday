@@ -13,8 +13,7 @@
                ->add('name', 'text')
                ->add('color', 'choice', array(
                    'choices' => array('Red' => 'Red', 'Green' => 'Green', 'Blue' => 'Blue')
-               ))
-               ->add('save', 'submit');
+               ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
