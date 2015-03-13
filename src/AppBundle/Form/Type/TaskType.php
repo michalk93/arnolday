@@ -20,7 +20,7 @@ class TaskType extends AbstractType{
 
     public function buildForm(FormBuilderInterface $builder, array $options){
         $builder->add('done', 'checkbox', ['required' => false])
-            ->add('priority', 'choice', ['choices' => [0,1,2]])
+            ->add('priority', 'choice', ['choices' => [0,1,2,3]])
             ->add('category', 'entity', ['class' => 'AppBundle:Category'])
             ->add('assignee', 'entity', ['class' => 'AppBundle:User']);
 
@@ -40,7 +40,7 @@ class TaskType extends AbstractType{
             'data_class' => 'AppBundle\Entity\Task',
         ]);
     }
-    
+
     public function getName(){
         return 'task';
     }
