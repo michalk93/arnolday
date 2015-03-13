@@ -2,6 +2,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use \DateTime;
 
 /**
  * @ORM\Table(name="task")
@@ -72,7 +73,14 @@ class Task
      */
     protected $category;
 
+    public function __construct() {
+      $this->createdAt = new DateTime();
+    }
 
+    public function __toString() {
+      return $this->content;
+
+    }
 
     /**
      * Get the value of Id
@@ -125,7 +133,7 @@ class Task
      *
      * @return self
      */
-    public function setDueDate(date $dueDate)
+    public function setDueDate(DateTime $dueDate)
     {
         $this->dueDate = $dueDate;
 
@@ -244,7 +252,7 @@ class Task
     /**
      * Get assignee
      *
-     * @return \AppBundle\Entity\User 
+     * @return \AppBundle\Entity\User
      */
     public function getAssignee()
     {
@@ -267,7 +275,7 @@ class Task
     /**
      * Get category
      *
-     * @return \AppBundle\Entity\Category 
+     * @return \AppBundle\Entity\Category
      */
     public function getCategory()
     {
