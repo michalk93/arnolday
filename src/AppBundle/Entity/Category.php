@@ -47,7 +47,7 @@ class Category
      * @Assert\NotBlank()
      */
     protected $createdAt;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="createdCategories")
      * @ORM\JoinColumn(name="createdBy_id", referencedColumnName="id", nullable=false)
@@ -60,10 +60,14 @@ class Category
         $this->createdAt = new DateTime();
     }
 
+    function __toString() {
+      return $this->name;
+    }
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -86,7 +90,7 @@ class Category
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -109,7 +113,7 @@ class Category
     /**
      * Get color
      *
-     * @return string 
+     * @return string
      */
     public function getColor()
     {
@@ -132,7 +136,7 @@ class Category
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -155,7 +159,7 @@ class Category
     /**
      * Get createdBy
      *
-     * @return \AppBundle\Entity\User 
+     * @return \AppBundle\Entity\User
      */
     public function getCreatedBy()
     {
