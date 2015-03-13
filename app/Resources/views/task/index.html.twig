@@ -1,5 +1,37 @@
-{% extends '::base.html.twig' %}
+{% extends 'base.html.twig' %}
 
+{% block title %}Task list{% endblock %}
 {% block body %}
-    {%  foreach  %}
+  <h1>Task list</h1>
+  <table class="table table-hover">
+    <tr>
+      <th>ID</th>
+      <th>Content</th>
+      <th>Due date</th>
+      <th>Status</th>
+      <th>Priority</th>
+      <th>Category</th>
+      <th>Edit</th>
+    </tr>
+    {% for task in tasks %}
+      <tr>
+        <td>{{ task.id }}</td>
+        <td>{{ task.content }}</td>
+        <td>{{ task.dueDate|date('d-m-Y') }}</td>
+        <td>{% if task.done %} <p class="text-success">Done</p>
+            {% else %} <p class="text-danger">Waiting</p>
+            {% endif %}</td>
+        <td>{% if task.priority == 0 %} Low
+            {% elseif task.priority == 1 %} Medium
+            {% elseif task.priority == 2 %} High
+            {% elseif task.priority == 3 %} Yesterday
+            {% endif %}</td>
+        <td>{{ task.category }}</td>
+        <td><a href="{{path('task-edit', {'id': task.id})}}">Edit</a></td>
+      </tr>
+    {% endfor %}
+  </table>
+  <a href="{{ path('task-add')}}" class="btn btn-primary btn-lg" role="button">Add new task</a>
+
+
 {% endblock %}

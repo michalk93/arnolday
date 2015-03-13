@@ -1,5 +1,6 @@
-{% extends '::base.html.twig' %}
+{% extends 'base.html.twig' %}
 
+{% block title %}Task add{% endblock %}
 {% block body %}
     <h3>Add new task</h3>
     <form method="POST" {{ form_enctype(form) }}>
@@ -9,9 +10,7 @@
         {{ form_row(form.priority) }}
         {{ form_row(form.category) }}
         {{ form_row(form.assignee) }}
-
         {{ form_widget(form._token) }}
-
-        <input type="submit" value="Dodaj"/>
+        {{form_row(form.save, {'attr': {'class': 'btn btn-primary btn-default', 'role': 'button'}})}}
     </form>
 {% endblock %}
