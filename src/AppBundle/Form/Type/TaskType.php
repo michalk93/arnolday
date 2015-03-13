@@ -22,7 +22,8 @@ class TaskType extends AbstractType{
         $builder->add('done', 'checkbox', ['required' => false])
             ->add('priority', 'choice', ['choices' => [0,1,2,3]])
             ->add('category', 'entity', ['class' => 'AppBundle:Category'])
-            ->add('assignee', 'entity', ['class' => 'AppBundle:User']);
+            ->add('assignee', 'entity', ['class' => 'AppBundle:User'])
+            ->add('save', 'submit');
 
         if($this->mode == 'create'){
             $builder->add('content', 'text')
