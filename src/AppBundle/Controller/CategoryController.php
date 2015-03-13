@@ -36,7 +36,7 @@
        if ($form->handleRequest($request)->isValid()) {
           $entityManager->persist($category);
           $entityManager->flush();
-          return new Response('Category added!');
+          return $this->redirect($this->generateUrl('categories'));
        }
 
        return $this->render('category/add.html.twig', ['form' => $form->createView()]);
@@ -52,7 +52,7 @@
           $entityManager = $this->getDoctrine()->getManager();
           $entityManager->persist($category);
           $entityManager->flush();
-          return new Response('Category edited!');
+          return $this->redirect($this->generateUrl('categories'));
        }
        return $this->render('category/edit.html.twig', ['form' => $form->createView()]);
     }
