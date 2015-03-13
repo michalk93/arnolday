@@ -16,12 +16,12 @@ class TaskController extends Controller
      */
     public function indexAction(){
         $tasks = $this->getDoctrine()->getRepository("AppBundle:Task")->findAll();
-        return $this->render('AppBundle:task:index.html.twig', ['tasks' => $tasks]);
+        return $this->render('task/index.html.twig', ['tasks' => $tasks]);
 
     }
     /**
      * @Route("/task/add", name="task-add")
-     * @Template("AppBundle:task:addTask.html.twig")
+     *
      */
     public function addTaskAction(Request $request)
     {
@@ -33,15 +33,15 @@ class TaskController extends Controller
         if($form->handleRequest($request)->isValid()){
             $em->persist($task);
             $em->flush();
-            return $this->render('AppBundle:task:index.html.twig');
+            return $this->redirect($this->generateUrl('task-index'));
         }
 
-        return $this->render('add.html.twig', ['form' => $form->createView()]);
+        return $this->render('task/add.html.twig', ['form' => $form->createView()]);
     }
 
     /**
      * @Route("/task/edit/{id}", name="task-edit")
-     * @Template("AppBundle:task:editTask.html.twig")
+     *
      */
     public function editTaskAction(Task $task, Request $request)
     {
@@ -49,10 +49,10 @@ class TaskController extends Controller
         if($form->handleRequest($request)->isValid()){
             $em = $this->getDoctrine()->getManager();
             $em->flush();
-            return $this->render('AppBundle:task:index.html.twig');
+            return $this->redirect($this->generateUrl('task-index'));
         }
 
-        return $this->render('edit.html.twig', ['form' => $form->createView()]);
+        return $this->render('task/edit.html.twig', ['form' => $form->createView()]);
     }
 
 
