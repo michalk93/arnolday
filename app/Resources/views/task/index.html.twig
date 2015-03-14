@@ -27,11 +27,11 @@
             {% elseif task.priority == 3 %} Yesterday
             {% endif %}</td>
         <td>{{ task.category }}</td>
-        <td><a href="{{path('task-edit', {'id': task.id})}}">Edit</a></td>
+        <td><a href="{{path('task_edit', {'id': task.id})}}">Edit</a></td>
       </tr>
     {% endfor %}
   </table>
-  <a href="{{ path('task-add')}}" class="btn btn-primary btn-lg" role="button">Add new task</a>
+  <a href="{{ path('task_add')}}" class="btn btn-primary btn-lg" role="button">Add new task</a>
 
 
 {% endblock %}

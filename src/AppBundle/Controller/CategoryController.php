@@ -23,7 +23,7 @@
     }
 
     /**
-     * @Route("/categories/add", name="category-add")
+     * @Route("/categories/add", name="category_add")
      * @Template()
      */
     public function addAction(Request $request) {
@@ -43,7 +43,7 @@
     }
 
     /**
-     * @Route("/categories/edit/{id}", name="category-edit")
+     * @Route("/categories/edit/{id}", name="category_edit")
      * @Template()
      */
     public function editAction(Category $category, Request $request) {

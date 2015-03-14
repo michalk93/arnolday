@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class TaskController extends Controller
 {
     /**
-     * @Route("task/index", name="task-index")
+     * @Route("task/index", name="task_index")
      */
     public function indexAction(){
         $tasks = $this->getDoctrine()->getRepository("AppBundle:Task")->findAll();
@@ -20,7 +20,7 @@ class TaskController extends Controller
 
     }
     /**
-     * @Route("/task/add", name="task-add")
+     * @Route("/task/add", name="task_add")
      *
      */
     public function addTaskAction(Request $request)
@@ -40,7 +40,7 @@ class TaskController extends Controller
     }
 
     /**
-     * @Route("/task/edit/{id}", name="task-edit")
+     * @Route("/task/edit/{id}", name="task_edit")
      *
      */
     public function editTaskAction(Task $task, Request $request)
