@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class TaskController extends Controller
 {
     /**
-     * @Route("task/index", name="task_index")
+     * @Route("tasks", name="task_index")
      */
     public function indexAction(){
         $tasks = $this->getDoctrine()->getRepository("AppBundle:Task")->findAll();
@@ -20,10 +20,10 @@ class TaskController extends Controller
 
     }
     /**
-     * @Route("/task/add", name="task_add")
+     * @Route("/tasks/add", name="task_add")
      *
      */
-    public function addTaskAction(Request $request)
+    public function addAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $task = new Task();
@@ -33,23 +33,23 @@ class TaskController extends Controller
         if($form->handleRequest($request)->isValid()){
             $em->persist($task);
             $em->flush();
-            return $this->redirect($this->generateUrl('task-index'));
+            return $this->redirect($this->generateUrl('task_index'));
         }
 
         return $this->render('task/add.html.twig', ['form' => $form->createView()]);
     }
 
     /**
-     * @Route("/task/edit/{id}", name="task_edit")
+     * @Route("/tasks/{id}/edit", name="task_edit")
      *
      */
-    public function editTaskAction(Task $task, Request $request)
+    public function editAction(Task $task, Request $request)
     {
         $form = $this->createForm(new TaskType(), $task);
         if($form->handleRequest($request)->isValid()){
             $em = $this->getDoctrine()->getManager();
             $em->flush();
-            return $this->redirect($this->generateUrl('task-index'));
+            return $this->redirect($this->generateUrl('task_index'));
         }
 
         return $this->render('task/edit.html.twig', ['form' => $form->createView()]);

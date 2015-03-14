@@ -13,13 +13,13 @@
  class CategoryController extends Controller {
 
     /**
-     * @Route("/categories", name="categories")
+     * @Route("/categories", name="category_index")
      * @Template()
      */
-    public function listAction() {
+    public function indexAction() {
        $entityManager = $this->getDoctrine()->getManager();
        $categories = $entityManager->getRepository('AppBundle:Category')->findAll();
-       return $this->render('category/list.html.twig', ['categories' => $categories]);
+       return $this->render('category/index.html.twig', ['categories' => $categories]);
     }
 
     /**
@@ -36,14 +36,14 @@
        if ($form->handleRequest($request)->isValid()) {
           $entityManager->persist($category);
           $entityManager->flush();
-          return $this->redirect($this->generateUrl('categories'));
+          return $this->redirect($this->generateUrl('category_index'));
        }
 
        return $this->render('category/add.html.twig', ['form' => $form->createView()]);
     }
 
     /**
-     * @Route("/categories/edit/{id}", name="category_edit")
+     * @Route("/categories/{id}/edit", name="category_edit")
      * @Template()
      */
     public function editAction(Category $category, Request $request) {
@@ -52,7 +52,7 @@
           $entityManager = $this->getDoctrine()->getManager();
           $entityManager->persist($category);
           $entityManager->flush();
-          return $this->redirect($this->generateUrl('categories'));
+          return $this->redirect($this->generateUrl('category_index'));
        }
        return $this->render('category/edit.html.twig', ['form' => $form->createView()]);
     }
