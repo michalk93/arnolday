@@ -12,6 +12,6 @@ class HelloController extends Controller
      * @Route("index", name="index")
      */
     public function indexAction(){
-        return $this->render('AppBundle:default:hello.html.twig');
+        return $this->render('default/index.html.twig');
     }
 }
