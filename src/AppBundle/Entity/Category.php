@@ -55,6 +55,10 @@ class Category
      */
     protected $createdBy;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="category")
+     */
+    protected $tasks;
 
     function __construct()
     {
