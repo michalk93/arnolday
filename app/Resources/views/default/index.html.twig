@@ -3,4 +3,50 @@
 {% block body %}
    <h1>Welcome to Arnolday!</h1>
    <p>Your best personal assistant!</p>
+
+    <canvas id="currencyChart" height="100" style="width: 100%">
+
+    </canvas>
+    <div id="chartLegend"></div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            var data = {
+                labels: {{ rateDates|json_encode|raw }},
+                datasets: [
+                {% for code,values in currency %}
+                    {
+                        label: "{{ code }}",
+                        fillColor: "rgba({{random(255)}},{{random(255)}},{{random(255)}},0.2)",
+                        strokeColor: "rgba({{random(255)}},{{random(255)}},{{random(255)}},1)",
+                        pointColor: "rgba({{random(255)}},{{random(255)}},{{random(255)}},1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(220,220,220,1)",
+                        data: {{ values|json_encode() }}
+                    },
+                {% endfor %}
+                ]
+            };
+            var canvas = $("#currencyChart");
+
+            var ctx = canvas.get(0).getContext("2d");
+            var myChart = new Chart(ctx).Line(data, {
+                responsive : true,
+                animation: true,
+                barValueSpacing : 5,
+                barDatasetSpacing : 1,
+                tooltipFillColor: "rgba(0,0,0,0.8)",
+                multiTooltipTemplate: "<%= datasetLabel %>: <%= value %>"
+            });
+
+
+        });
+
+    </script>
 {% endblock %}

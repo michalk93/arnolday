@@ -8,6 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class TaskController extends Controller
 {
@@ -17,8 +22,9 @@ class TaskController extends Controller
     public function indexAction(){
         $tasks = $this->getDoctrine()->getRepository("AppBundle:Task")->findAll();
         return $this->render('task/index.html.twig', ['tasks' => $tasks]);
-
     }
+
+
     /**
      * @Route("/tasks/add", name="task_add")
      *

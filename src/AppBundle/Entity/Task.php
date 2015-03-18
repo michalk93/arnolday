@@ -2,6 +2,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use \DateTime;
 
 /**
@@ -24,6 +25,8 @@ class Task
      * @var string
      *
      * @ORM\Column(name="content", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=255, min=20)
      */
     protected $content;
 
@@ -31,6 +34,7 @@ class Task
      * @var date
      *
      * @ORM\Column(name="dueDate", type="date")
+     * @Assert\Date()
      */
     protected $dueDate;
 
