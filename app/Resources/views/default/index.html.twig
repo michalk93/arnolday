@@ -1,13 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-   <h1>Welcome to Arnolday!</h1>
+    <div class="jumbotron">
+        <h1>Welcome to ARNOLDAY!</h1>
+        <p><strong>A</strong>pplication <strong>R</strong>uling <strong>N</strong>ot <strong>O</strong>n<strong>L</strong>y <strong>DAY</strong> | Your best personal assistant!</p>
+
+    </div>
+   <h1></h1>
    <p>Your best personal assistant!</p>
 
-    <canvas id="currencyChart" height="100" style="width: 100%">
+    <div>
+        <div class="page-header">
+            <h1>Average exchange rate <small>EUR, USD, CHF</small></h1>
+        </div>
+        <canvas id="currencyChart" height="100" style="width: 100%"></canvas>
+    </div>
 
-    </canvas>
-    <div id="chartLegend"></div>
 {% endblock %}
 
 {% block javascripts %}
