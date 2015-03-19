@@ -12,7 +12,7 @@
        $builder
                ->add('name', 'text')
                ->add('color', 'choice', array(
-                   'choices' => array('Red' => 'Red', 'Green' => 'Green', 'Blue' => 'Blue')
+                   'choices' => array('#FF1A1A' => 'Red', '#26A826' => 'Green', '#1A1AFF' => 'Blue')
                ));
     }
 

@@ -1,12 +1,22 @@
 {% extends 'base.html.twig' %}
 {% block title %}Users list{% endblock %}
 {% block body %}
-  <h1>Users list</h1>
-  <ul>
+    <div class="page-header">
+        <h1>Users list<small> explore users or add new</small><a href="{{ path('user_add')}}" class="btn btn-primary pull-right" role="button">Add new user</a></h1>
+    </div>
+  <table class="table table-hover">
+      <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Menu</th>
+      </tr>
   {% for user in users %}
-      <li>{{ user.name }} <a href="{{path('user_edit', {'id': user.id})}}">Edit</a></li>
+      <tr>
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td><a href="{{path('user_edit', {'id': user.id})}}">Edit</a></td>
+      </tr>
   {% endfor %}
-  </ul>
-  <br />
-    <a href="{{ path('user_add')}}" class="btn btn-primary btn-lg" role="button">Add new user</a>
+  </table>
+
 {% endblock %}
