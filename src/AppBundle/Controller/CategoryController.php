@@ -9,6 +9,7 @@
  use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
  use AppBundle\Entity\Category;
  use AppBundle\Form\Type\CategoryType;
+ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
  class CategoryController extends Controller {
 
@@ -47,15 +48,14 @@
      * @Route("/categories/{id}/edit", name="category_edit")
      * @Template()
      */
-    public function editAction(Category $category, Request $request, $id) {
+    public function editAction(Category $category, Request $request) {
         $user = $this->getUser();
-        $userId = $user->getId();
 
-        $em = $this->getDoctrine()->getManager();
-        $category = $em->getRepository('AppBundle:Category')->findOneBy(array('id'=>$id));
 
-        if($userId != $category->getCreatedBy()){
-            return 'Cannot edit this category';
+
+        if($user != $category->getCreatedBy()){
+            return new Response("Cannot edit this task");
+            //throw new AccessDeniedException("Cannot edit this task");
         }
         
        $form = $this->createForm(new CategoryType(), $category);

@@ -50,16 +50,12 @@ class TaskController extends Controller
      * @Route("/tasks/{id}/edit", name="task_edit")
      *
      */
-    public function editAction(Task $task, Request $request, $id)
+    public function editAction(Task $task, Request $request)
     {
         $user = $this->getUser();
-        $userId = $user->getId();
-        $em = $this->getDoctrine()->getManager();
-        $task = $em->getRepository('AppBundle:Task')->findOneBy(array('id'=>$id));
 
-
-        if($userId != $task->getCreatedBy()) {
-            return "Cannot edit this task";
+        if($user != $task->getCreatedBy()) {
+            return new Response("Cannot edit this task");
         }
 
         $form = $this->createForm(new TaskType(), $task);

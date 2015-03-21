@@ -20,7 +20,8 @@ security:
                 target: /index
 
     encoders:
-        AppBundle\Entity\User: plaintext
+        AppBundle\Entity\User:
+            algorithm: bcrypt
 
 
 
