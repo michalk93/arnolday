@@ -46,6 +46,11 @@
      */
     protected $name;
 
+     /**
+      * @ORM\Column(name="role", type="string")
+      */
+     protected $role;
+
     /**
      * @var createdAt
      *
@@ -72,6 +77,7 @@
     public function __construct() {
        $this->createdAt = new DateTime();
         $this->createdTasks = new ArrayCollection();
+        $this->role = "ROLE_USER";
     }
 
      /**
@@ -297,7 +303,7 @@
       */
      public function getRoles()
      {
-         return ['ROLE_USER'];
+         return [$this->role];
      }
 
      /**
@@ -332,4 +338,4 @@
      {
          // TODO: Implement eraseCredentials() method.
      }
- }
+}
