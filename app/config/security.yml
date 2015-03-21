@@ -1,7 +1,7 @@
 security:
     providers:
-        in_memory:
-            memory: ~
+        adminstrators:
+            entity: { class: AppBundle:User, property: email }
 
     firewalls:
         dev:
@@ -10,3 +10,16 @@ security:
 
         default:
             anonymous: ~
+            http_basic: ~
+            form_login:
+                login_path: /login
+                check_path: /login_check
+                use_referer: true
+
+    encoders:
+        AppBundle\Entity\User: plaintext
+
+
+
+    access_control:
+       - { path: ^/tasks/add, roles: ROLE_ADMIN}
