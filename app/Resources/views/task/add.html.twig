@@ -4,6 +4,7 @@
 {% block body %}
     <h3>Add new task</h3>
     <form method="POST" {{ form_enctype(form) }}>
+        {{ form_row(form.name) }}
         {{ form_row(form.content) }}
         {{ form_row(form.dueDate) }}
         {{ form_row(form.done) }}

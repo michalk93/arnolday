@@ -24,6 +24,15 @@ class Task
     /**
      * @var string
      *
+     * @ORM\Column(name="name", type="string", length=25)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=25, min=3)
+     */
+    protected $name;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="content", type="string", length=255)
      * @Assert\NotBlank()
      * @Assert\Length(max=255, min=20)
@@ -285,4 +294,29 @@ class Task
     {
         return $this->category;
     }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Task
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+
 }

@@ -25,7 +25,8 @@ class TaskType extends AbstractType{
             ->add('assignee', 'entity', ['class' => 'AppBundle:User']);
 
         if($this->mode == 'create'){
-            $builder->add('content', 'text')
+            $builder->add('name','text')
+                ->add('content', 'text')
                 ->add('dueDate', 'date');
         }else if($this->mode == 'edit'){
             $builder->add('content', 'text', ['disabled' => true])

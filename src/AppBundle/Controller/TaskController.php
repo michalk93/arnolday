@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Task;
 use AppBundle\Form\Type\TaskType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -24,6 +25,18 @@ class TaskController extends Controller
         return $this->render('task/index.html.twig', ['tasks' => $tasks]);
     }
 
+    /**
+     * @Route("/tasks/{id}", name="tasks_show")
+     *
+     */
+    public function showAction(Task $task) {
+        $user = $this->getUser();
+        if($user != $task->getCreatedBy()) {
+            throw new AccessDeniedException();
+        }
+
+        return $this->render('task/show.html.twig', ['task'=> $task]);
+    }
 
     /**
      * @Route("/tasks/add", name="task_add")
