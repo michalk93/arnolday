@@ -21,7 +21,7 @@ security:
 
     encoders:
         AppBundle\Entity\User:
-            algorithm: bcrypt
+            algorithm: plaintext
 
 
 
