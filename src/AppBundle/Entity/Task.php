@@ -35,7 +35,7 @@ class Task
      *
      * @ORM\Column(name="content", type="string", length=255)
      * @Assert\NotBlank()
-     * @Assert\Length(max=255, min=20)
+     * @Assert\Length(max=255, min=5)
      */
     protected $content;
 
