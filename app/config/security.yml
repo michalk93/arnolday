@@ -15,6 +15,9 @@ security:
                 login_path: /login
                 check_path: /login_check
                 use_referer: true
+            logout:
+                path: /logout
+                target: /index
 
     encoders:
         AppBundle\Entity\User: plaintext
@@ -22,4 +25,5 @@ security:
 
 
     access_control:
-       - { path: ^/tasks/add, roles: ROLE_ADMIN}
+       - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+       - { path: ^/, roles: ROLE_USER}
