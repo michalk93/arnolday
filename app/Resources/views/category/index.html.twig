@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 {% block title %}Category list{% endblock %}
 {% block body %}
-    <h1>Category list</h1>
+    <div class="page-header">
+        <h1>Category list<small> explore categories or create new one</small><a href="{{ path('category_add') }}" class="btn btn-primary pull-right" role="button">Add new category</a></h1>
+    </div>
     <table class="table">
         <tr>
             <th>Name</th>
@@ -16,6 +18,4 @@
         </tr>
     {% endfor %}
     </table>
-
-   <a href="{{ path('category_add') }}" class="btn btn-primary btn-lg" role="button">Add new</a>
 {% endblock %}

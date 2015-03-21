@@ -17,13 +17,21 @@ use Symfony\Component\Serializer\Serializer;
 class TaskController extends Controller
 {
     /**
-     * @Route("tasks", name="task_index")
+     * @Route("tasks/assigned", name="task_index")
      */
     public function indexAction(){
-        $tasks = $this->getDoctrine()->getRepository("AppBundle:Task")->findBy(array('createdBy'=>$this->getUser()));
+        $tasks = $this->getDoctrine()->getRepository("AppBundle:Task")->findBy(array('assignee'=>$this->getUser()));
         return $this->render('task/index.html.twig', ['tasks' => $tasks]);
     }
 
+    /**
+     * @Route("tasks/my", name="task")
+     */
+    public function createdAction(){
+        //$tasks = $this->getDoctrine()->getRepository("AppBundle:Task")->findBy(array('createdBy'=>$this->getUser()));
+        $tasks = $this->getUser()->getCreatedTasks();
+        return $this->render('task/index.html.twig', ['tasks' => $tasks]);
+    }
 
     /**
      * @Route("/tasks/add", name="task_add")
@@ -52,10 +60,8 @@ class TaskController extends Controller
      */
     public function editAction(Task $task, Request $request)
     {
-        $user = $this->getUser();
-
-        if($user != $task->getCreatedBy()) {
-            return new Response("Cannot edit this task");
+        if($this->getUser() != $task->getCreatedBy()) {
+            throw new AccessDeniedException("Cannot edit this task");
         }
 
         $form = $this->createForm(new TaskType(), $task);

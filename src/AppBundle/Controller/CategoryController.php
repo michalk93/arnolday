@@ -18,8 +18,9 @@
      * @Template()
      */
     public function indexAction() {
-       $entityManager = $this->getDoctrine()->getManager();
-       $categories = $entityManager->getRepository('AppBundle:Category')->findBy(array('createdBy'=>$this->getUser()));
+       //$entityManager = $this->getDoctrine()->getManager();
+       //$categories = $entityManager->getRepository('AppBundle:Category')->findBy(array('createdBy'=>$this->getUser()));
+        $categories = $this->getUser()->getCreatedCategories();
        return $this->render('category/index.html.twig', ['categories' => $categories]);
     }
 
@@ -49,13 +50,10 @@
      * @Template()
      */
     public function editAction(Category $category, Request $request) {
-        $user = $this->getUser();
 
-
-
-        if($user != $category->getCreatedBy()){
-            return new Response("Cannot edit this task");
-            //throw new AccessDeniedException("Cannot edit this task");
+        if($this->getUser() != $category->getCreatedBy()){
+            //return new Response("Cannot edit this task");
+            throw new AccessDeniedException("Cannot edit this category");
         }
         
        $form = $this->createForm(new CategoryType(), $category);

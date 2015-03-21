@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="pl">
+<head>
+    <META HTTP-EQUIV="content-type" CONTENT="text/html; charset=iso-8859-2">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+</head>
+
+<body>
+
+<div class="page-header">
+    <h1>{{user}}</h1>
+    <h6>{{ "now"|date('Y-m-d') }}</h6>
+</div>
+<table class="table table-striped">
+    <tr class="table-header">
+        <th>Task content</th>
+        <th>Due date</th>
+        <th>Category</th>
+        <th>Prioryty</th>
+        <th>Status</th>
+    </tr>
+    {% for task in tasks %}
+    <tr>
+        <td>{{ task.content }}</td>
+        <td>{{ task.dueDate|date('d-m-Y') }}</td>
+        <td>{{ task.category.name }}</td>
+        <td>{{ task.priority }}</td>
+        <td>
+            {% if task.done == 1 %}
+                DONE
+            {% else %}
+                <span class="label label-danger">WAITING</span>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
