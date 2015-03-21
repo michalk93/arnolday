@@ -1,3 +1,7 @@
+parameters:
+   app_name: 'Arnolday'
+   mailer_from: 'arnolday@miniserwis.pl'
+
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }

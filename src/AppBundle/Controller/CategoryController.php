@@ -52,7 +52,6 @@
     public function editAction(Category $category, Request $request) {
 
         if($this->getUser() != $category->getCreatedBy()){
-            //return new Response("Cannot edit this task");
             throw new AccessDeniedException("Cannot edit this category");
         }
         

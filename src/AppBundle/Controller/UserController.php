@@ -31,6 +31,10 @@
 
        if ($form->handleRequest($request)->isValid()) {
           $em = $this->getDoctrine()->getManager();
+          $plainPassword = $user->getPassword();
+          $encoder = $this->container->get('security.password_encoder');
+          $encoded = $encoder->encodePassword($user, $plainPassword);
+          $user->setPassword($encoded);
           $em->persist($user);
           $em->flush();
           return $this->redirect($this->generateUrl('user_index'));

@@ -1,0 +1,12 @@
+<div>
+   <h1>New Task!</h1>
+   <p>Hello {{assignee.name}}!</p>
+   <p>{{user.name}} has just assigned a new task to you.</p>
+   <p>Below you will find the task's details:</p>
+   <table>
+      <tr><td>Task:</td><td>{{task.content}}</td></tr>
+      <tr><td>Category:</td><td>{{task.category.name}}</td></tr>
+      <tr><td>Priority:</td><td>{{task.priority}}</td></tr>
+      <tr><td>Due date:</td><td>{{task.dueDate|date("Y-d-m")}}</td></tr>
+   </table>
+</div>
