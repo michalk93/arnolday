@@ -20,7 +20,7 @@ class TaskController extends Controller
      * @Route("tasks", name="task_index")
      */
     public function indexAction(){
-        $tasks = $this->getDoctrine()->getRepository("AppBundle:Task")->findAll();
+        $tasks = $this->getDoctrine()->getRepository("AppBundle:Task")->findBy(array('createdBy'=>$this->getUser()));
         return $this->render('task/index.html.twig', ['tasks' => $tasks]);
     }
 
@@ -33,7 +33,8 @@ class TaskController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $task = new Task();
-        $task->setCreatedBy($em->find("AppBundle:User", 1));
+        $user = $this->getUser();
+        $task->setCreatedBy($user);
         $form = $this->createForm(new TaskType(), $task);
 
         if($form->handleRequest($request)->isValid()){
@@ -49,8 +50,18 @@ class TaskController extends Controller
      * @Route("/tasks/{id}/edit", name="task_edit")
      *
      */
-    public function editAction(Task $task, Request $request)
+    public function editAction(Task $task, Request $request, $id)
     {
+        $user = $this->getUser();
+        $userId = $user->getId();
+        $em = $this->getDoctrine()->getManager();
+        $task = $em->getRepository('AppBundle:Task')->findOneBy(array('id'=>$id));
+
+
+        if($userId != $task->getCreatedBy()) {
+            return "Cannot edit this task";
+        }
+
         $form = $this->createForm(new TaskType(), $task);
         if($form->handleRequest($request)->isValid()){
             $em = $this->getDoctrine()->getManager();

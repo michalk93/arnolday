@@ -18,7 +18,7 @@
      */
     public function indexAction() {
        $entityManager = $this->getDoctrine()->getManager();
-       $categories = $entityManager->getRepository('AppBundle:Category')->findAll();
+       $categories = $entityManager->getRepository('AppBundle:Category')->findBy(array('createdBy'=>$this->getUser()));
        return $this->render('category/index.html.twig', ['categories' => $categories]);
     }
 
@@ -27,26 +27,37 @@
      * @Template()
      */
     public function addAction(Request $request) {
-       $entityManager = $this->getDoctrine()->getManager();
-       $user = $entityManager->find('AppBundle:User', 1);
-       $category = new Category();
-       $category->setCreatedBy($user);
-       $form = $this->createForm(new CategoryType(), $category);
+        $entityManager = $this->getDoctrine()->getManager();
+        $category = new Category();
+        $user = $this->getUser();
+        $category->setCreatedBy($user);
 
-       if ($form->handleRequest($request)->isValid()) {
-          $entityManager->persist($category);
-          $entityManager->flush();
-          return $this->redirect($this->generateUrl('category_index'));
-       }
+        $form = $this->createForm(new CategoryType(), $category);
 
-       return $this->render('category/add.html.twig', ['form' => $form->createView()]);
+        if ($form->handleRequest($request)->isValid()) {
+            $entityManager->persist($category);
+            $entityManager->flush();
+            return $this->redirect($this->generateUrl('category_index'));
+        }
+
+        return $this->render('category/add.html.twig', ['form' => $form->createView()]);
     }
 
     /**
      * @Route("/categories/{id}/edit", name="category_edit")
      * @Template()
      */
-    public function editAction(Category $category, Request $request) {
+    public function editAction(Category $category, Request $request, $id) {
+        $user = $this->getUser();
+        $userId = $user->getId();
+
+        $em = $this->getDoctrine()->getManager();
+        $category = $em->getRepository('AppBundle:Category')->findOneBy(array('id'=>$id));
+
+        if($userId != $category->getCreatedBy()){
+            return 'Cannot edit this category';
+        }
+        
        $form = $this->createForm(new CategoryType(), $category);
        if ($form->handleRequest($request)->isValid()) {
           $entityManager = $this->getDoctrine()->getManager();
