@@ -25,8 +25,8 @@
                 <td><a href="{{ path('tasks_show', {'id': task.id}) }}" >{{ task.name }}</a></td>
                 <td>{{ task.content }}</td>
                 <td>{{ task.dueDate|date('d-m-Y') }}</td>
-                <td>{% if task.done %} <p class="text-success">Done</p>
-                    {% else %} <p class="text-danger">Waiting</p>
+                <td>{% if task.done %} <p class="label label-success">Done</p>
+                    {% else %} <p class="label label-danger">Waiting</p>
                     {% endif %}</td>
                 <td>{% if task.priority == 0 %} Low
                     {% elseif task.priority == 1 %} Medium
@@ -34,7 +34,12 @@
                     {% elseif task.priority == 3 %} Yesterday
                     {% endif %}</td>
                 <td><span style="display:inline-block; width: 10px; height: 30px; background: {{ task.category.color }}"></span> {{ task.category }} </td>
-                <td><a href="{{path('task_done', {'task': task})}}">Mark as done</a></td>
+                <td>
+                    {% if task.done == 0 %}
+                        <a href="{{path('task_done', {'id': task.id})}}">Mark as done</a></td>
+                    {% else %}
+                        <span>Marked as done</span>
+                    {% endif %}
             </tr>
         {% endfor %}
     </table>
