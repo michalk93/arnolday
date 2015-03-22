@@ -22,20 +22,24 @@ class CalendarEventListener {
 
     public function loadEvents(CalendarEvent $calendarEvent)
     {
+        $this->generateCalendarData($calendarEvent, "createdBy");
+        $this->generateCalendarData($calendarEvent, "assignee");
+    }
+
+    private function generateCalendarData(CalendarEvent $calendarEvent, $column){
         $startDate = $calendarEvent->getStartDatetime();
         $endDate = $calendarEvent->getEndDatetime();
         $user = $this->securityContext->getToken()->getUser();
-        $userId = $user->getId();
-        $request = $calendarEvent->getRequest();
-        $filter = $request->get('filter');
-        $tasks = $this->em->getRepository('AppBundle:Task')
-            ->createQueryBuilder('task')
-            ->where('task.dueDate BETWEEN :startDate and :endDate')
-            ->andWhere('task.createdBy = :id')
-            ->setParameter('startDate', $startDate->format('Y-m-d'))
-            ->setParameter('endDate', $endDate->format('Y-m-d'))
-            ->setParameter('id', $userId)
-            ->getQuery()->getResult();
+        $class = "";
+        $tasks = null;
+        if($column == "assignee"){
+            $tasks = $this->em->getRepository('AppBundle:Task')->getAssignedTasks($startDate, $endDate, $user);
+            $class = "task-assigned";
+        }else if($column == "createdBy"){
+            $tasks = $this->em->getRepository('AppBundle:Task')->getCreatedTasks($startDate, $endDate, $user);
+            $class = "task-created";
+        }
+
 
         foreach($tasks as $task) {
             $eventEntity = new EventEntity($task->getName(), $task->getDueDate(), null, true);
@@ -43,11 +47,10 @@ class CalendarEventListener {
             $eventEntity->setBgColor($task->getCategory()->getColor());
             $eventEntity->setFgColor('#FFFFFF');
             $eventEntity->setUrl($this->router->generate('tasks_show',array('id' => $task->getId())));
-            $eventEntity->setCssClass('my-custom-class');
+            $eventEntity->setCssClass($class);
 
             $calendarEvent->addEvent($eventEntity);
         }
     }
-
 
 }

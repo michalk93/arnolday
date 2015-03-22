@@ -8,7 +8,7 @@ use \DateTime;
 /**
  * @ORM\Table(name="task")
  * Task
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TaskRepository")
  */
 class Task
 {

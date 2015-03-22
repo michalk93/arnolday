@@ -1,5 +1,24 @@
 {% extends 'base.html.twig' %}
 {% block title %}Calendar{% endblock %}
 {% block body %}
+    <div>Options:
+        <button class="btn btn-primary btn-xs" id="showCreated">Show tasks created by me only</button>
+        <button class="btn btn-primary btn-xs" id="showAssigned">Show tasks asigned to me only</button>
+    </div>
+    <hr/>
     {% include 'ADesignsCalendarBundle::calendar.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('#showCreated').bind('click', function(){
+            $(this).toggleClass("btn-primary");
+            $('.task-created').toggleClass("hidden");
+        });
+        $('#showAssigned').bind('click', function(){
+            $(this).toggleClass("btn-primary");
+            $('.task-assigned').toggleClass("hidden");
+        });
+    </script>
 {% endblock %}
