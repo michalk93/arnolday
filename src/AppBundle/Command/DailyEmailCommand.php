@@ -8,11 +8,10 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use AppBundle\Entity\User;
-use Symfony\Component\Validator\Constraints\DateTime;
 use \DateTime;
 
 
-class DailyEmailCommCommand extends ContainerAwareCommand
+class DailyEmailCommand extends ContainerAwareCommand
 {
     protected function configure()
     {

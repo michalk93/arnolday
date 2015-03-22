@@ -32,9 +32,9 @@ class TaskRepository extends EntityRepository
     public function getTasksForNextDay(){
         $tomorrowDate = new DateTime();
         return $this->getEntityManager()->getRepository('AppBundle:Task')
+            ->createQueryBuilder('task')
             ->where('task.dueDate = :tomorrow')
             ->setParameter('tomorrow', $tomorrowDate->format('Y-m-d'))
             ->getQuery()->getResult();
     }
-    
 }
