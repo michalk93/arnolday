@@ -9,6 +9,7 @@
   <table class="table table-hover">
     <tr>
       <th>ID</th>
+        <th>Name</th>
       <th>Content</th>
       <th>Due date</th>
       <th>Status</th>
@@ -19,6 +20,7 @@
     {% for task in tasks %}
       <tr>
         <td>{{ task.id }}</td>
+          <td><a href="{{ path('tasks_show', {'id': task.id}) }}" >{{ task.name }}</a></td>
         <td>{{ task.content }}</td>
         <td>{{ task.dueDate|date('d-m-Y') }}</td>
         <td>{% if task.done %} <p class="text-success">Done</p>
