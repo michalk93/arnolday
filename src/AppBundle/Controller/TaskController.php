@@ -30,7 +30,6 @@
      * @Route("tasks/my", name="task")
      */
     public function createdAction(){
-        //$tasks = $this->getDoctrine()->getRepository("AppBundle:Task")->findBy(array('createdBy'=>$this->getUser()));
         $tasks = $this->getUser()->getCreatedTasks();
         return $this->render('task/index.html.twig', ['tasks' => $tasks]);
     }
