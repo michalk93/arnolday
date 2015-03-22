@@ -14,5 +14,10 @@ services:
          tags:
             - { name: kernel.event_listener , event: calendar.load_events, method: loadEvents }
 
+
     exchange_rate:
         class: AppBundle\EventListener\ExchangeRateEventListener
+
+    notification_mailer:
+        class: AppBundle\Services\NotificationMailer
+        arguments: ["@mailer","@security.token_storage", "@templating", %app_name%, %mailer_from%]

@@ -54,25 +54,9 @@
        $form = $this->createForm(new TaskType(), $task);
 
        if ($form->handleRequest($request)->isValid()) {
-          //move this to a service:
-          $assignee = $task->getAssignee();
-          $mailer = $this->get('mailer');
-          $appName = $this->container->getParameter('app_name');
-          $mailerFrom = $this->container->getParameter('mailer_from');
-          $message = $mailer->createMessage()
-                  ->setSubject('Notification: New Task')
-                  ->setFrom(array($mailerFrom => $appName))
-                  ->setTo($assignee->getEmail())
-                  ->setBody(
-                  $this->renderView(
-                          'emails/new_task.html.twig', array(
-                              'task' => $task,
-                              'user' => $user,
-                              'assignee' => $assignee)
-                  ), 'text/html'
-                  )
-          ;
-          $mailer->send($message);
+          $notification = $this->get('notification_mailer');
+          $notification->createMessage($task);
+          $notification->send();
           
           $em = $this->getDoctrine()->getManager();
           $em->persist($task);
