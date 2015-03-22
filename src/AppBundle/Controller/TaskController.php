@@ -21,8 +21,8 @@
      * @Route("tasks/assigned", name="task_index")
      */
 
-    public function indexAction(){
-        $tasks = $this->getDoctrine()->getRepository("AppBundle:Task")->findBy(array('assignee'=>$this->getUser()));
+    public function indexAction() {
+        $tasks = $this->getUser()->getAssignedTasks();
         return $this->render('task/index.html.twig', ['tasks' => $tasks]);
     }
 
@@ -30,7 +30,6 @@
      * @Route("tasks/my", name="task")
      */
     public function createdAction(){
-        //$tasks = $this->getDoctrine()->getRepository("AppBundle:Task")->findBy(array('createdBy'=>$this->getUser()));
         $tasks = $this->getUser()->getCreatedTasks();
         return $this->render('task/index.html.twig', ['tasks' => $tasks]);
     }
