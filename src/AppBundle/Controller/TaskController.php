@@ -21,8 +21,8 @@
      * @Route("tasks/assigned", name="task_index")
      */
 
-    public function indexAction(){
-        $tasks = $this->getDoctrine()->getRepository("AppBundle:Task")->findBy(array('assignee'=>$this->getUser()));
+    public function indexAction() {
+        $tasks = $this->getUser()->getAssignedTasks();
         return $this->render('task/index.html.twig', ['tasks' => $tasks]);
     }
 

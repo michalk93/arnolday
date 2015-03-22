@@ -26,8 +26,9 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Tasks <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{path('task_index')}}">Assigned to me</a></li>
-                            <li class="divider"></li>
                             <li><a href="{{ path('task') }}">Created by me</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{ path('task_add') }}">Create new task</a> </li>
                         </ul>
                     </li>
                     <li><a href="{{path('category_index')}}">Categories</a></li>
