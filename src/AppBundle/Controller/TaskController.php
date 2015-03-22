@@ -67,6 +67,15 @@
        return $this->render('task/add.html.twig', ['form' => $form->createView()]);
     }
 
+     /**
+      * @Route("/tasks/{id}/done", name="task_done")
+      *
+      */
+     public function doneAction(Task $task) {
+         $task->setDone(1);
+         return $this->redirect($this->generateUrl('task_index'));
+     }
+
     /**
      * @Route("/tasks/{id}/edit", name="task_edit")
      *
