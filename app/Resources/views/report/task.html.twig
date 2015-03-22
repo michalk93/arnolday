@@ -3,6 +3,12 @@
 <head>
     <META HTTP-EQUIV="content-type" CONTENT="text/html; charset=iso-8859-2">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+    <style>
+        th {
+            padding-bottom: 10px;
+            text-transform: uppercase;
+        }
+    </style>
 </head>
 
 <body>
@@ -27,17 +33,17 @@
         <td>{{ task.priority }}</td>
         <td>
             {% if task.done == 1 %}
-                DONE
+                <span style="border-right: green 5px solid; padding-right: 10px;">DONE</span>
             {% else %}
-                <span class="label label-danger">WAITING</span>
+                <span style="border-right: red 5px solid; padding-right: 10px;">WAITING</span>
             {% endif %}
         </td>
     </tr>
-        <tr>
-            <td colspan="5">
-                {{ task.content }}
-            </td>
-        </tr>
+    <tr>
+        <td colspan="5" style="padding: 10px 0px; border-bottom: 1px #eee solid">
+            <p>{{ task.content }}</p>
+        </td>
+    </tr>
     {% endfor %}
 
 </table>
