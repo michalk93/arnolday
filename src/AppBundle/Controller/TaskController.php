@@ -72,7 +72,10 @@
       *
       */
      public function doneAction(Task $task) {
+         $em = $this->getDoctrine()->getManager();
          $task->setDone(1);
+         $em->persist($task);
+         $em->flush();
          return $this->redirect($this->generateUrl('task_index'));
      }
 
