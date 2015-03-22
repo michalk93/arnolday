@@ -2,6 +2,8 @@
 
 namespace AppBundle\Services;
 
+use AppBundle\Entity\User;
+use DateTime;
 use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use AppBundle\Entity\Task;
@@ -42,4 +44,20 @@ class NotificationMailer {
     public function send() {
         $this->mailer->send($this->message);
     }
+
+    public function createDailyMessage(User $user, array $tasks) {
+        $date = new DateTime();
+        $this->message = $this->mailer->createMessage()
+            ->setSubject("ARNOLDAY - Daily reminder")
+            ->setFrom(array($this->mailerFrom => $this->appName))
+            ->setTo($user->getEmail())
+            ->setBody(
+                $this->twig->render(
+                    'emails/daily_notification.html.twig', array(
+                        'user' => $user,
+                        'tasks' => $tasks,
+                        'date' => $date)
+                ), 'text/html');
+    }
+
 }

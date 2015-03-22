@@ -1,0 +1,14 @@
+<div>
+    <h1>ARNOLDAY - Daily reminder</h1>
+    <p>Hello {{user.name}}!</p>
+    <p>Here are your tasks for today, {{ date|date('d-m-Y') }}.</p>
+    <p>Below you will find the tasks' details:</p>
+    {% for task in tasks %}
+    <table>
+        <tr><td>Task:</td><td>{{task.name}}</td></tr>
+        <tr><td>Details</td><td>{{ task.content }}</td></tr>
+        <tr><td>Category:</td><td>{{task.category.name}}</td></tr>
+        <tr><td>Priority:</td><td>{{task.priority}}</td></tr>
+    </table>
+    {% endfor %}
+</div>
