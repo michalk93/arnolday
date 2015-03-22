@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Task list{% endblock %}
+{% block body %}
+    <div class="page-header">
+        <h1>Assigned tasks<small> explore tasks to do</small></h1>
+    </div>
+    <p class="pull-right">
+        Options: <a href="{{ path('tasks-assigned-pdf') }}">Generate assigned tasks PDF</a>
+    </p>
+    <table class="table table-hover">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Content</th>
+            <th>Due date</th>
+            <th>Status</th>
+            <th>Priority</th>
+            <th>Category</th>
+            <th>Edit</th>
+        </tr>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.id }}</td>
+                <td><a href="{{ path('tasks_show', {'id': task.id}) }}" >{{ task.name }}</a></td>
+                <td>{{ task.content }}</td>
+                <td>{{ task.dueDate|date('d-m-Y') }}</td>
+                <td>{% if task.done %} <p class="text-success">Done</p>
+                    {% else %} <p class="text-danger">Waiting</p>
+                    {% endif %}</td>
+                <td>{% if task.priority == 0 %} Low
+                    {% elseif task.priority == 1 %} Medium
+                    {% elseif task.priority == 2 %} High
+                    {% elseif task.priority == 3 %} Yesterday
+                    {% endif %}</td>
+                <td><span style="display:inline-block; width: 10px; height: 30px; background: {{ task.category.color }}"></span> {{ task.category }} </td>
+                <td><a href="{{path('task_done', {'task': task})}}">Mark as done</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+{% endblock %}

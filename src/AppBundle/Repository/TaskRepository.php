@@ -28,7 +28,6 @@ class TaskRepository extends EntityRepository
             ->setParameter('endDate', $endDate->format('Y-m-d'));
     }
 
-
     public function getTasksForNextDay(){
         $tomorrowDate = new DateTime();
         return $this->getEntityManager()->getRepository('AppBundle:Task')

@@ -19,7 +19,7 @@
 
     public function indexAction() {
         $tasks = $this->getUser()->getAssignedTasks();
-        return $this->render('task/index.html.twig', ['tasks' => $tasks]);
+        return $this->render(':task:indexAssigned.html.twig', ['tasks' => $tasks]);
     }
 
     /**
@@ -27,7 +27,7 @@
      */
     public function createdAction(){
         $tasks = $this->getUser()->getCreatedTasks();
-        return $this->render('task/index.html.twig', ['tasks' => $tasks]);
+        return $this->render(':task:indexCreated.html.twig', ['tasks' => $tasks]);
     }
 
     /**
