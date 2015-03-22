@@ -10,10 +10,6 @@
  use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
  use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
  use Symfony\Component\HttpFoundation\Response;
- use Symfony\Component\Serializer\Encoder\JsonEncoder;
- use Symfony\Component\Serializer\Encoder\XmlEncoder;
- use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
- use Symfony\Component\Serializer\Serializer;
 
  class TaskController extends Controller {
 
