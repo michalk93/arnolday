@@ -5,13 +5,13 @@
     <div class="page-header">
         <h1>Tasks list<small> explore tasks or create new one</small><a href="{{ path('task_add')}}" class="btn btn-primary pull-right" role="button">Add new task</a></h1>
     </div>
-    <div>
-        Options: <a href="{{ path('tasks-pdf') }}">Generate PDF</a>
-    </div>
+    <p class="pull-right">
+        Options: <a href="{{ path('tasks-created-pdf') }}">Generate created tasks PDF</a> | <a href="{{ path('tasks-assigned-pdf') }}">Generate assigned tasks PDF</a>
+    </p>
   <table class="table table-hover">
     <tr>
       <th>ID</th>
-        <th>Name</th>
+      <th>Name</th>
       <th>Content</th>
       <th>Due date</th>
       <th>Status</th>

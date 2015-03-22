@@ -11,11 +11,25 @@ use Symfony\Component\HttpFoundation\Response;
 class ReportController extends Controller
 {
     /**
-     * @Route("/tasks/pdf", name="tasks-pdf")
+     * @Route("/tasks/pdf/assigned", name="tasks-assigned-pdf")
      */
-    public function generatePDFAction(){
+    public function generateAssignedTasksPDFAction(){
         $user = $this->getUser();
-        $html = $this->renderView(':report:task.html.twig',['user' => $user, 'tasks' => $user->getAssignedTasks()]);
+        $html = $this->renderView(':report:assignedTasks.html.twig',['user' => $user, 'tasks' => $user->getAssignedTasks()]);
+        $pdfGenerator = $this->get('spraed.pdf.generator');
+        $pdf = $pdfGenerator->generatePDF($html);
+        return new Response($pdf, 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="report-'.$user->getName().'.pdf"'
+        ]);
+    }
+
+    /**
+     * @Route("/tasks/pdf/created", name="tasks-created-pdf")
+     */
+    public function generateCreatedTasksPDFAction(){
+        $user = $this->getUser();
+        $html = $this->renderView(':report:createdTasks.html.twig',['user' => $user, 'tasks' => $user->getCreatedTasks()]);
         $pdfGenerator = $this->get('spraed.pdf.generator');
         $pdf = $pdfGenerator->generatePDF($html);
         return new Response($pdf, 200, [
@@ -29,6 +43,6 @@ class ReportController extends Controller
      */
     public function generateHTMLAction(){
         $user = $this->getUser();
-        return $this->render(':report:task.html.twig',['user' => $user, 'tasks' => $user->getAssignedTasks()]);
+        return $this->render('taskReportTemplate.html.twig',['user' => $user, 'tasks' => $user->getAssignedTasks()]);
     }
 }
